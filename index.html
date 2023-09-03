@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+</head>
+<body>
+    <pre>
+        Q1 function counter(){
+            var counter = 0;
+        
+            function IncreaseCounter() {
+                return counter += 1;
+            };
+        
+            return IncreaseCounter;
+        }
+        
+        var counter = counter();
+        alert(counter());
+        alert(counter());
+        alert(counter());
+        alert(counter());
+
+        output // 1 2 3 4 
+        when you call counter function it will return IncreaseCounter then
+        when IncreaseCounter will call it will return counter += 1
+        counter += 1 stored in the var counter 
+        so a an output it will keep incrementing the counter and alert the number 
+
+
+
+        Q2 let count = 0;
+        (function () {
+          if (count === 0) {
+            let count = 1;
+            console.log(count); // What is logged?
+          }
+          console.log(count); // What is logged?
+        })();
+
+        output // 1  0
+
+        it is a self invoking function and the functional scope is created
+        initial value of counter is 0 so the if condition will be true and it will allocate a count an memory in functional scope and assign it wil 1 
+        so the first console.log will print 1 
+        and second console.log will print 0 
+        as the count=1 is limited to functional scope so it will take the global value which is 0
+
+
+        Q3 "for (var i = 0; i < 3; i++) {
+            setTimeout(function log() {
+              console.log(i); // What is logged?
+            }, 1000);
+          }"
+        output /// 3 3 3
+
+        for loop will run for 3 time once the for loop is executed i will be 3 
+        after setTimeOut will be call and it will apply the concept of clouser
+        setTimeOut will be called with it lexical scope and value of i will be 3 for that reason it will print 3 for 3 times 
+        
+
+        Q4 Write a code to calculate area of a rectangle using inner function. In this case outer function should accept parameter length and inner function should accept parameter breadth.
+
+        function outer(length){
+            function inner(breadth){
+                return length*breadth;
+            }
+            return inner;
+        }
+        var area=outer(12);
+        console.log(area(10));
+
+        output -> 120;
+
+        Q5 Take a variable in outer function and create an inner function to increase the counter every time it is called
+
+        function outer(){
+            let i=0;
+            function inner(){
+                return i+=1;
+            }
+            return inner;
+        }
+        let data=outer();
+        console.log(data()); // 1
+        console.log(data()); // 2
+        
+
+        Q6"Print Output
+
+        var a = 12;
+        (function () {
+          alert(a);
+        })();"
+
+        output // 12
+        self invoking function will call itself and look for the value of a if not found in function scope then it will 
+        look in golbal scope 
+
+        Q7 "var a = 10;
+        var x = (function () {
+          var a = 12;
+          return function () {
+            alert(a);
+          };
+        })();
+        x();"
+        
+        output 12
+        
+        As the self invoking function is called it will return function of alert and when you call x alert will be called with its lexical scope
+        as a result it will value of a will be 12 not 10
+        
+        Q8 var globalVar = "xyz";
+
+        (function outerFunc(outerArg) {
+            var outerVar = 'a';
+            
+            (function innerFunc(innerArg) {
+            var innerVar = 'b';
+            
+            console.log(
+                "outerArg = " + outerArg + "\n" +
+                "innerArg = " + innerArg + "\n" +
+                "outerVar = " + outerVar + "\n" +
+                "innerVar = " + innerVar + "\n" +
+                "globalVar = " + globalVar);
+            })(456);
+        })(123);
+
+        output 
+        outerArg = 123
+        innerArg = 456
+        outerVar = a
+        innerVar = b
+        globalVar = xyz
+
+        due to its lexical scope it will generate the output outerArg=123,innerArg = 456,outerVar = a,innerVar = b,globalVar = xyz
+        
+    </pre>
+</body>
+<script src="./index.js"></script>
+</html>
